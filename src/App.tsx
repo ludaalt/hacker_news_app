@@ -1,14 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+
+import NewsList from './components/NewsList';
+import { getNews } from './services/request';
 
 function App() {
+  const dispatch = useDispatch();
+  // const newsArray = useSelector((state) => state.news.arrayNews);
+  const newsArray = useSelector((state: RootStateOrAny) => state.news?.arrayNews);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-
-      </header>
+      <button onClick={() => dispatch(getNews())}>Update News</button>
+      <NewsList newsArray={newsArray} />
     </div>
   );
 }
