@@ -1,6 +1,10 @@
 import React from 'react';
-
+// import { useSelector, RootStateOrAny } from 'react-redux';
 import { timestampToDate } from '../services/timestampToDate';
+// import { getComments } from '../services/getComments';
+// import { deleteComments } from '../services/updateComments';
+// import { useDispatch } from 'react-redux';
+// import store from '../store/store';
 // interface NewsItem {
 //   title: string;
 //   rating: number;
@@ -17,7 +21,7 @@ import { timestampToDate } from '../services/timestampToDate';
 //   }
 // };
 
-const NewsItem = (item: any, key: number) => {
+const NewsItem = (item: any, key: number, commentsArray: any) => {
   const divStyle = {
     backgroundColor: '#cccc',
     color: 'green',

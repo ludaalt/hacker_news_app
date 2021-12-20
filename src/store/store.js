@@ -2,10 +2,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import { addNewsReducer } from './addNewsReducer';
+import { updateNewsReducer } from './updateNewsReducer';
+import { updateCommentsReducer } from './updateCommentsReducer';
 
 const rootReducer = combineReducers({
-  news: addNewsReducer,
+  news: updateNewsReducer,
+  comments: updateCommentsReducer,
 });
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+
+export default store;

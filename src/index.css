@@ -3,3 +3,17 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+.button {
+  color: #fff;
+  background: rgb(212,75,56);
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  margin: 30px 0 0 30px;
+}
+
+.button:hover { background: rgb(232,95,76); }
+.button:active { background: rgb(152,15,0); } 

@@ -1,18 +1,33 @@
-import React from 'react';
-import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import NewsList from './components/NewsList';
-import { getNews } from './services/request';
+import NewsItemPostPage from './pages/NewsItemPostPage';
+import HomePage from './pages/HomePage';
+import { getNews } from './services/getNews';
+import { updateNews } from './services/updateNews';
 
 function App() {
+  const fn = () => {
+    dispatch(updateNews());
+    dispatch(getNews());
+  };
+
   const dispatch = useDispatch();
-  // const newsArray = useSelector((state) => state.news.arrayNews);
-  const newsArray = useSelector((state: RootStateOrAny) => state.news?.arrayNews);
+  useEffect(() => {
+    dispatch(getNews());
+  });
+
+  setInterval(fn, 60000);
 
   return (
     <div className="App">
-      <button onClick={() => dispatch(getNews())}>Update News</button>
-      <NewsList newsArray={newsArray} />
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/items/:id" element={<NewsItemPostPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
