@@ -1,21 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 
 import store from './store/store';
 import './index.css';
 import App from './App';
 
-// const mapStateToProps = (state: any) => {
-//   const { comments } = state;
-//   return comments;
-// };
+import { updateNews } from './services/updateNews';
+import { getNews } from './services/getNews';
 
-// const Container = connect(mapStateToProps)(App);
+const mapStateToProps = (state: any) => {
+  const { comments } = state;
+  return comments;
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    buttonFunction: () => {
+      dispatch(updateNews());
+      dispatch(getNews());
+      console.log('btn');
+    },
+  };
+};
+
+const Container = connect(mapStateToProps, mapDispatchToProps)(App);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Container />
   </Provider>,
   document.getElementById('root')
 );

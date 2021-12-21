@@ -4,7 +4,9 @@ import { useParams } from 'react-router';
 
 import { timestampToDate } from '../services/timestampToDate';
 import { renderComments } from '../services/renderComments';
+import Button from '../components/Button';
 
+import { useNavigate } from 'react-router-dom';
 // import { getComments } from '../services/getComments';
 // import { deleteComments } from '../services/updateComments';
 // import { useDispatch } from 'react-redux';
@@ -38,17 +40,27 @@ const NewsItemPostPage = () => {
 
   // setInterval(fn, 1000);
 
+  const navigate = useNavigate();
+
+  const goBackToHomePage = () => {
+    navigate(-1);
+  };
+
   return (
-    <div className="newsItemPostContainer">
-      <h1>{newsItem && newsItem.title}</h1>
-      <a href={newsItem && newsItem.url} target="_blank" rel="noreferrer">
-        {newsItem && newsItem.url}
-      </a>
-      <p>{newsItem && timestampToDate(newsItem.time)}</p>
-      <p>{newsItem && newsItem.user}</p>
-      <p>{newsItem && newsItem.comments_count}</p>
-      {/* <JsonTree data={commentsArray} /> */}
-    </div>
+    <>
+      <Button title="Back" buttonFunction={goBackToHomePage} />
+
+      <div className="newsItemPostContainer">
+        <h1>{newsItem && newsItem.title}</h1>
+        <a href={newsItem && newsItem.url} target="_blank" rel="noreferrer">
+          {newsItem && newsItem.url}
+        </a>
+        <p>{newsItem && timestampToDate(newsItem.time)}</p>
+        <p>{newsItem && newsItem.user}</p>
+        <p>{newsItem && newsItem.comments_count}</p>
+        {/* <JsonTree data={commentsArray} /> */}
+      </div>
+    </>
   );
 };
 

@@ -1,22 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-// import { Dispatch } from 'redux';
 
-import { getNews } from '../services/getNews';
-import { updateNews } from '../services/updateNews';
+interface Button {
+  title: string;
+  buttonFunction?: any;
+  component?: any;
+  to?: any;
+}
 
-const Button = () => {
-  const dispatch = useDispatch();
-  const update = () => {
-    return (dispatch: any) => {
-      dispatch(updateNews());
-      dispatch(getNews());
-    };
-  };
-
+const Button = ({ title, buttonFunction }: Button) => {
   return (
-    <button className="button" onClick={() => dispatch(update())}>
-      Update News
+    <button className="button" onClick={buttonFunction}>
+      {title}
     </button>
   );
 };

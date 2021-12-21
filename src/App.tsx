@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage';
 import { getNews } from './services/getNews';
 import { updateNews } from './services/updateNews';
 
-function App() {
+function App({ buttonFunction }: any) {
   const fn = () => {
     dispatch(updateNews());
     dispatch(getNews());
@@ -24,7 +24,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage buttonFunction={buttonFunction} />} />
           <Route path="/items/:id" element={<NewsItemPostPage />} />
         </Routes>
       </Router>
