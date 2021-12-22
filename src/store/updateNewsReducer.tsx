@@ -5,7 +5,7 @@ const defaultState = {
 const ADD_NEWS = 'ADD_NEWS';
 const DELETE_NEWS = 'DELETE_NEWS';
 
-export const updateNewsReducer = (state = defaultState, action) => {
+export const updateNewsReducer = (state = defaultState, action: any) => {
   switch (action.type) {
     case ADD_NEWS: {
       const newState = { ...state, arrayNews: [...state.arrayNews, ...action.payload] };
@@ -26,7 +26,7 @@ export const updateNewsReducer = (state = defaultState, action) => {
   }
 };
 
-export const addNewsAction = (payload) => {
+export const addNewsAction = (payload: any) => {
   return {
     type: ADD_NEWS,
     payload,

@@ -5,10 +5,14 @@ const defaultState = {
 const UPDATE_COMMENTS = 'UPDATE_COMMENTS';
 const DELETE_COMMENTS = 'DELETE_COMMENTS';
 
-export const updateCommentsReducer = (state = defaultState, action) => {
+export const updateCommentsReducer = (state = defaultState, action: any) => {
   switch (action.type) {
     case UPDATE_COMMENTS: {
-      return { ...state, arrayComments: [action.payload] };
+      // const newState = { ...state, arrayComments: [...state.arrayComments, action.payload] };
+      const newState = { arrayComments: action.payload };
+
+      // newState.arrayComments = [...new Set(newState.arrayComments)];
+      return newState;
     }
 
     case DELETE_COMMENTS: {
@@ -20,7 +24,7 @@ export const updateCommentsReducer = (state = defaultState, action) => {
   }
 };
 
-export const updateCommentsAction = (payload) => {
+export const updateCommentsAction = (payload: any) => {
   return {
     type: UPDATE_COMMENTS,
     payload,

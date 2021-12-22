@@ -3,8 +3,6 @@ import React from 'react';
 interface Button {
   title: string;
   buttonFunction?: any;
-  component?: any;
-  to?: any;
 }
 
 const Button = ({ title, buttonFunction }: Button) => {

@@ -1,18 +1,13 @@
 export const renderComments = (arr: Array<any>, rootElem: any) => {
   if (arr && arr.length != 0) {
-    for (let i = 0; i < arr[0].length; i += 1) {
-      const parent = createNode('ul', '');
-      let child;
+    for (let i = 0; i < arr.length; i += 1) {
+      const li = createNode('li', arr[i]['content']);
+      rootElem && rootElem.appendChild(li);
 
-      if (arr[0][i]['content'] !== undefined) {
-        child = createNode('li', arr[0][i]['content']);
-        parent.appendChild(child);
-        rootElem.appendChild(parent);
+      if (arr[i]['comments']) {
+        const ul = createNode('ul', '');
+        renderComments(arr[i], ul);
       }
-
-      // if (arr[i]['comments'].length > 0) {
-      //   renderComments(arr[i]);
-      // }
     }
   }
 };

@@ -17,3 +17,12 @@ body {
 
 .button:hover { background: rgb(232,95,76); }
 .button:active { background: rgb(152,15,0); } 
+
+.newsItem {
+  background-color: #cccc;
+  color: green;
+  margin: 10px auto;
+  max-width: 60%;
+  padding: 10px;
+  border-radius: 5px;
+}

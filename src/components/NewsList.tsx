@@ -3,36 +3,21 @@ import { Link } from 'react-router-dom';
 
 import NewsItem from './NewsItem';
 import { getComments } from '../services/getComments';
-import { deleteComments } from '../services/updateComments';
-import { useDispatch } from 'react-redux';
 
 interface Props {
-  newsArray: Array<any>;
+  newsArray: Array<object>;
+  comments: Array<object>;
 }
 
-const NewsList: FC<Props> = ({ newsArray }: Props) => {
-  const dispatch = useDispatch();
-
-  const getCommentsFunction = (id: number) => {
-    dispatch(deleteComments());
-    dispatch(getComments(id));
-  };
-
+const NewsList: FC<Props> = ({ newsArray, comments }: Props) => {
   return (
     <div>
       {newsArray &&
-        newsArray.map((item: any, key: number) => {
+        newsArray.map((item: any, index: number) => {
           return (
             item && (
-              <Link
-                to={`/items/${item.id}`}
-                key={item.id}
-                onClick={() => {
-                  getCommentsFunction(item.id);
-                }}
-              >
-                {/* <p>{key + 1}</p> */}
-                <NewsItem key={key} item={item} />
+              <Link to={`/items/${item.id}`} key={item.id} onClick={() => getComments(item.id)}>
+                <NewsItem key={index} item={item} />
               </Link>
             )
           );
