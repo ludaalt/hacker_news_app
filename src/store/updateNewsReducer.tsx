@@ -1,11 +1,13 @@
-const defaultState = {
+import { StateType, ActionType } from '../types/types';
+
+const defaultState: StateType = {
   arrayNews: [],
 };
 
 const ADD_NEWS = 'ADD_NEWS';
 const DELETE_NEWS = 'DELETE_NEWS';
 
-export const updateNewsReducer = (state = defaultState, action: any) => {
+export const updateNewsReducer = (state = defaultState, action: ActionType) => {
   switch (action.type) {
     case ADD_NEWS: {
       const newState = { ...state, arrayNews: [...state.arrayNews, ...action.payload] };

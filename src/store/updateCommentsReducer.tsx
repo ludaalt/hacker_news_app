@@ -1,11 +1,13 @@
-const defaultState = {
+import { StateType, ActionType } from '../types/types';
+
+const defaultState: StateType = {
   arrayComments: [],
 };
 
 const UPDATE_COMMENTS = 'UPDATE_COMMENTS';
 const DELETE_COMMENTS = 'DELETE_COMMENTS';
 
-export const updateCommentsReducer = (state = defaultState, action: any) => {
+export const updateCommentsReducer = (state = defaultState, action: ActionType) => {
   switch (action.type) {
     case UPDATE_COMMENTS: {
       // const newState = { ...state, arrayComments: [...state.arrayComments, action.payload] };

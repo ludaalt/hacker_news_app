@@ -8,7 +8,9 @@ import HomePage from './pages/HomePage';
 import { getNews } from './services/getNews';
 import { updateNews } from './services/deleteNews';
 
-function App({ news, comments, buttonFunction }: any) {
+import { AppProps } from './types/types';
+
+function App({ news, comments, buttonFunction }: AppProps) {
   const dispatch = useDispatch();
 
   const updateNewsFunction = () => {

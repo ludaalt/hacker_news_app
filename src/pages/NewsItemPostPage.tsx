@@ -6,10 +6,12 @@ import { timestampToDate } from '../services/timestampToDate';
 import Button from '../components/Button';
 
 import { useDispatch } from 'react-redux';
-import { updateComments } from '../services/updateComments';
 import { renderComments } from '../services/renderComments';
+import { getComments } from '../services/getComments';
 
-const NewsItemPostPage = ({ news, comments }: any) => {
+import { AppProps } from '../types/types';
+
+const NewsItemPostPage = ({ news, comments }: AppProps) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,11 +20,16 @@ const NewsItemPostPage = ({ news, comments }: any) => {
 
   const rootElementToRender = document.querySelector('.newsItemPostContainer ul');
 
-  useEffect(() => {
-    console.log(comments);
-    updateComments(dispatch, Number(id));
+  const updateCommentsFunction = () => {
+    dispatch(getComments(Number(id)));
     renderComments(comments, rootElementToRender);
+  };
+
+  useEffect(() => {
+    updateCommentsFunction();
   }, []);
+
+  setInterval(updateCommentsFunction, 60000);
 
   const goBackToHomePage = () => {
     navigate(-1);
