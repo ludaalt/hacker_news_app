@@ -1,4 +1,4 @@
-FROM node
+FROM node:16.13.1
 
 WORKDIR /app
 
@@ -12,4 +12,4 @@ ENV PORT 3000
 
 EXPOSE $PORT
 
-CMD ["npm", "react-scripts --openssl-legacy-provider start"]
+CMD ["npm", "start"]
