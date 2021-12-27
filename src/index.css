@@ -25,4 +25,32 @@ body {
   max-width: 60%;
   padding: 10px;
   border-radius: 5px;
+  text-decoration: none;
+}
+
+.drop-container {
+  position: relative;
+  border: 2px solid green;
+
+  padding: 20px;
+}
+
+.drop {
+  position: absolute; 
+  z-index: 10;
+  left: -27px; 
+  top: 15px;
+  width: 20px;
+  height: 20px; 
+  background: darkgray;
+  text-align: center;
+  font-weight: bold;
+  font-size: 100%; 
+  cursor: pointer;
+  border-radius: 50%;
+  color: black;
+}
+
+.non-display {
+  display: none;
 }

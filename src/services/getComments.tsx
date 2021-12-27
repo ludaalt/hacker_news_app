@@ -6,8 +6,7 @@ export const getComments = (id: number) => {
     fetch(`https://api.hnpwa.com/v0/item/${id}.json`)
       .then((response) => response.json())
       .then((json) => {
-        console.log(json.comments);
-        dispatch(updateCommentsAction(json.comments));
+        dispatch(updateCommentsAction(json));
       })
       .catch((error) => console.error('Error: ', error));
   };
