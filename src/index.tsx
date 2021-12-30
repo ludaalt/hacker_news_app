@@ -6,11 +6,6 @@ import store from './store/store';
 import './index.css';
 import App from './App';
 
-import { updateNews } from './services/deleteNews';
-import { getNews } from './services/getNews';
-
-// type AppDispatch = typeof store.dispatch;
-
 const mapStateToProps = (state: RootStateOrAny) => {
   return {
     news: state.news.arrayNews,
@@ -18,17 +13,16 @@ const mapStateToProps = (state: RootStateOrAny) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    buttonFunction: () => {
-      dispatch(updateNews());
-      dispatch(getNews());
-      console.log('btn');
-    },
-  };
-};
+// const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
+//   return {
+//     buttonFunction: () => {
+//       // dispatch(updateNews());
+//       // dispatch(getNews());
+//     },
+//   };
+// };
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(App);
+const Container = connect(mapStateToProps, null)(App);
 
 ReactDOM.render(
   <Provider store={store}>

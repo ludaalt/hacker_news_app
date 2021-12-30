@@ -1,11 +1,8 @@
 import React from 'react';
 
-interface Button {
-  title: string;
-  buttonFunction?: any;
-}
+import { ButtonType } from '../types/types';
 
-const Button = ({ title, buttonFunction }: Button) => {
+const Button: React.FC<ButtonType> = ({ title, buttonFunction }) => {
   return (
     <button className="button" onClick={buttonFunction}>
       {title}

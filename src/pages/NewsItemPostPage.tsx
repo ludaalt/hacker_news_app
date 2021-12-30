@@ -11,25 +11,25 @@ import { getComments } from '../services/getComments';
 
 // import { deleteComments } from '../services/deleteComments';
 
-import { AppProps } from '../types/types';
+import { AppProps, NewsItemType } from '../types/types';
 
-const NewsItemPostPage = ({ news, comments }: AppProps) => {
+const NewsItemPostPage: React.FC<AppProps> = ({ news, comments }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const newsItem = news.find((item: any) => item.id == id);
+  const newsItem = news && news.find((item: NewsItemType) => item.id === Number(id));
 
-  const updateCommentsFunction = () => {
-    // dispatch(deleteComments());
-    dispatch(getComments(Number(id)));
-  };
+  // const updateCommentsFunction = () => {
+  // dispatch(deleteComments());
+  // dispatch(getComments(Number(id)));
+  // };
 
   useEffect(() => {
     dispatch(getComments(Number(id)));
   }, []);
 
-  setInterval(updateCommentsFunction, 60000);
+  // setInterval(updateCommentsFunction, 60000);
 
   const goBackToHomePage = () => {
     navigate(-1);
@@ -46,9 +46,9 @@ const NewsItemPostPage = ({ news, comments }: AppProps) => {
         </a>
         <p>date: {newsItem && timestampToDate(newsItem.time)}</p>
         <p>author: {newsItem && newsItem.user}</p>
-        <p>number of comments: {newsItem && newsItem.comments_count}</p>
+        <p>number of comments: {newsItem && newsItem.commentsCount}</p>
 
-        <Comments comments={comments.comments} />
+        <Comments comments={comments} />
       </div>
     </>
   );

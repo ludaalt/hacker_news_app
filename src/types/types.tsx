@@ -1,15 +1,45 @@
+// import { ActionType } from './actionType';
+
 export interface StateType {
-  arrayNews?: Array<object> | Array<any> | any;
-  arrayComments?: Array<object> | Array<any> | any;
+  arrayNews?: any;
+  arrayComments?: any;
 }
 
-export interface ActionType {
-  type: string;
-  payload?: any;
+export interface ButtonType {
+  title?: string;
+  buttonFunction?: ((event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
+}
+
+export interface NewsItemType {
+  id: number;
+  title: string;
+  points: number;
+  user: string;
+  time: number;
+  commentsCount: number;
+  url: string;
+}
+
+export interface CommentsItemType {
+  id: number;
+  title: string;
+  points: number;
+  user: string;
+  time: number;
+
+  content: string;
+  comments: Array<Comment>;
+}
+
+export interface Comment {
+  id: number;
+  user: string;
+  time: number;
+  content: string;
 }
 
 export interface AppProps {
-  news?: Array<any> | any;
-  comments?: Array<any> | any;
-  buttonFunction?: any;
+  news?: Array<NewsItemType>;
+  comments?: Array<object>;
+  buttonFunction?: ((event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
 }

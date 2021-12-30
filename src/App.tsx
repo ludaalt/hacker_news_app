@@ -10,7 +10,7 @@ import { updateNews } from './services/deleteNews';
 
 import { AppProps } from './types/types';
 
-function App({ news, comments, buttonFunction }: AppProps) {
+const App: React.FC<AppProps> = ({ news, comments, buttonFunction }) => {
   const dispatch = useDispatch();
 
   const updateNewsFunction = () => {
@@ -20,7 +20,7 @@ function App({ news, comments, buttonFunction }: AppProps) {
 
   useEffect(() => {
     dispatch(getNews());
-  }, []);
+  });
 
   setInterval(updateNewsFunction, 60000);
 
@@ -37,6 +37,6 @@ function App({ news, comments, buttonFunction }: AppProps) {
       </Router>
     </div>
   );
-}
+};
 
 export default App;
