@@ -1,24 +1,20 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-
 import { timestampToDate } from '../services/timestampToDate';
-import { getComments } from '../services/getComments';
+import { NewsItemType } from '../types/types';
 
-// import { NewsItemType } from '../types/types';
-
-const NewsItem = (item: any) => {
-  const dispatch = useDispatch();
+const NewsItem: React.FC<NewsItemType> = ({ title, url, points, user, time, commentsCount }) => {
   return (
-    <div
-      className="newsItem"
-      onClick={() => {
-        dispatch(getComments(Number(item.id)));
-      }}
-    >
-      <h2>{item.title}</h2>
-      <p>points: {item.points}</p>
-      <p>author: {item.user}</p>
-      <p>date: {timestampToDate(item.time)}</p>
+    <div className="newsItem">
+      <h2>{title}</h2>
+      {url ? (
+        <a href={url} target="_blank" rel="noreferrer">
+          {url}
+        </a>
+      ) : null}
+      {points ? <p>points: {points}</p> : null}
+      <p>author: {user}</p>
+      {time ? <p>date: {timestampToDate(time)}</p> : null}
+      {commentsCount ? <p>number of comments: {commentsCount}</p> : null}
     </div>
   );
 };
