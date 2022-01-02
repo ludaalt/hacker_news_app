@@ -6,17 +6,10 @@ const defaultState: StateType = {
   arrayComments: [],
 };
 
-// const UPDATE_COMMENTS = 'UPDATE_COMMENTS';
-// const DELETE_COMMENTS = 'DELETE_COMMENTS';
-
 export const updateCommentsReducer = (state = defaultState, action: Action): StateType => {
   switch (action.type) {
     case ActionType.UPDATE_COMMENTS: {
-      const newState = { ...state, arrayComments: [...state.arrayComments, action.payload] };
-      // const newState = { arrayComments: action.payload };
-
-      // newState.arrayComments = [...new Set(newState.arrayComments)];
-      return newState;
+      return { ...state, arrayComments: action.payload };
     }
 
     case ActionType.DELETE_COMMENTS: {
@@ -27,19 +20,6 @@ export const updateCommentsReducer = (state = defaultState, action: Action): Sta
       return state;
   }
 };
-
-// export const updateCommentsAction = (payload: Array<CommentsItemType>) => {
-//   return {
-//     type: UPDATE_COMMENTS,
-//     payload,
-//   };
-// };
-
-// export const deleteCommentsAction = () => {
-//   return {
-//     type: DELETE_COMMENTS,
-//   };
-// };
 
 export function updateCommentsAction(payload: Array<CommentsItemType>): Action {
   return { type: ActionType.UPDATE_COMMENTS, payload };

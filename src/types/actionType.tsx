@@ -4,5 +4,3 @@ export const ActionType = {
   UPDATE_COMMENTS: 'UPDATE_COMMENTS',
   DELETE_COMMENTS: 'DELETE_COMMENTS',
 };
-
-// export default ActionType;

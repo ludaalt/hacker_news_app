@@ -1,40 +1,37 @@
 import React, { useEffect } from 'react';
-import { AppProps } from '../types/types';
-
-// interface HTMLCollectionOf<T extends Element> extends HTMLCollection {
-//   item(index: number): T;
-//   namedItem(name: string): T;
-//   [index: number]: T;
-// }
+import { AppProps, CommentsItemType } from '../types/types';
 
 const Comments: React.FC<AppProps> = ({ comments }) => {
   useEffect(() => {
-    document.querySelectorAll('.drop-container > ul').forEach((item: any) => {
-      item.classList.add('non-display');
-    });
+    const nonDisplayCollection = document.querySelectorAll('.drop-container > ul');
+    for (let i = 0; i < nonDisplayCollection.length; i += 1) {
+      nonDisplayCollection[i].classList.add('non-display');
+    }
   }, []);
 
   const dropHandle = (event: React.MouseEvent<Element, MouseEvent>): void => {
     const dropElement = event.target as HTMLElement;
     dropElement.innerHTML = dropElement.innerHTML === '+' ? '-' : '+';
-    dropElement.classList.toggle('non-display');
+
+    dropElement.nextElementSibling &&
+      dropElement.nextElementSibling.classList.toggle('non-display');
   };
 
   return (
     <>
       {comments &&
-        comments.map((item: any, key: number) => (
+        comments.map((item: CommentsItemType, key: number) => (
           <ul key={key}>
-            {item.comments.length ? (
+            {item.comments ? (
               <li className="drop-container">
-                {item.content.replace(/<p>/gi, '')}
+                {item.content && item.content.replace(/<p>/gi, '')}
                 <div className="drop" onClick={(event) => dropHandle(event)}>
                   +
                 </div>
                 <Comments comments={item.comments} />
               </li>
             ) : (
-              <li>{item.content.replace(/<p>/gi, '')}</li>
+              <li>{item.content && item.content.replace(/<p>/gi, '')}</li>
             )}
           </ul>
         ))}

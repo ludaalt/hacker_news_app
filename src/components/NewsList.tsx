@@ -2,17 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import NewsItem from './NewsItem';
-import { AppProps } from '../types/types';
+import { AppProps, NewsItemType } from '../types/types';
 
 const NewsList: React.FC<AppProps> = ({ news }) => {
   return (
     <div>
       {news &&
-        news.map((newsItem: any, index: number) => {
+        news.map((item: NewsItemType, index: number) => {
           return (
-            newsItem && (
-              <Link to={`/items/${newsItem.id}`} key={newsItem.id}>
-                <NewsItem key={index} item={newsItem} />
+            item && (
+              <Link to={`/items/${item.id}`} key={item.id}>
+                <NewsItem
+                  key={index}
+                  title={item.title}
+                  points={item.points}
+                  user={item.user}
+                  time={item.time}
+                />
               </Link>
             )
           );

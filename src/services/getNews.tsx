@@ -5,7 +5,7 @@ import { Action } from '../types/action';
 
 const PAGES_COUNT = 4;
 
-export const getNews = () => {
+export const getNews = (): unknown => {
   return (dispatch: Dispatch<Action>) => {
     for (let i = 1; i <= PAGES_COUNT; i += 1) {
       fetch(`https://api.hnpwa.com/v0/news/${i}.json`)

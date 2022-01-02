@@ -1,8 +1,14 @@
 // import { ActionType } from './actionType';
 
+export interface AppProps {
+  news?: Array<NewsItemType>;
+  comments?: Array<object>;
+  buttonFunction?: ((event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
+}
+
 export interface StateType {
-  arrayNews?: any;
-  arrayComments?: any;
+  arrayNews?: Array<NewsItemType>;
+  arrayComments?: Array<CommentsItemType>;
 }
 
 export interface ButtonType {
@@ -11,35 +17,22 @@ export interface ButtonType {
 }
 
 export interface NewsItemType {
-  id: number;
-  title: string;
-  points: number;
-  user: string;
-  time: number;
-  commentsCount: number;
-  url: string;
+  id?: number;
+  title?: string;
+  url?: string;
+  points?: number;
+  user?: string;
+  time?: number;
+  commentsCount?: number;
 }
 
 export interface CommentsItemType {
-  id: number;
-  title: string;
-  points: number;
-  user: string;
-  time: number;
+  id?: number;
+  title?: string;
+  points?: number;
+  user?: string;
+  time?: number;
 
-  content: string;
-  comments: Array<Comment>;
-}
-
-export interface Comment {
-  id: number;
-  user: string;
-  time: number;
-  content: string;
-}
-
-export interface AppProps {
-  news?: Array<NewsItemType>;
-  comments?: Array<object>;
-  buttonFunction?: ((event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
+  content?: string;
+  comments?: Array<CommentsItemType>;
 }
