@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Button from '../components/Button';
+import Header from '../components/Header';
 import NewsList from '../components/NewsList';
-
 import { getNews } from '../services/getNews';
-import { updateNews } from '../services/deleteNews';
 import { AppProps } from '../types/types';
 
 const HomePage: React.FC<AppProps> = ({ news, comments }) => {
   const dispatch = useDispatch();
-  const getNewsFunction = () => {
-    dispatch(updateNews());
+  useEffect(() => {
     dispatch(getNews());
-  };
+  }, []);
+
+  // setInterval(getNewsFunction, 60000);
+
   return (
     <>
-      <Button title="Update News" buttonFunction={getNewsFunction} />
+      <Header />
       <NewsList news={news} comments={comments} />
     </>
   );
