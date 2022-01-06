@@ -22,16 +22,18 @@ const Comments: React.FC<AppProps> = ({ comments }) => {
       {comments &&
         comments.map((item: CommentsItemType, key: number) => (
           <ul key={key}>
-            {item.comments ? (
+            {item.comments && item.comments.length !== 0 ? (
               <li className="drop-container">
-                {item.content && item.content.replace(/<p>/gi, '')}
+                {item.type === 'comment' && item.content && item.content.replace(/<p>/gi, '')}
                 <div className="drop" onClick={(event) => dropHandle(event)}>
                   +
                 </div>
                 <Comments comments={item.comments} />
               </li>
             ) : (
-              <li>{item.content && item.content.replace(/<p>/gi, '')}</li>
+              <li>
+                {item.type === 'comment' && item.content && item.content.replace(/<p>/gi, '')}
+              </li>
             )}
           </ul>
         ))}
