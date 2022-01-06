@@ -1,68 +1,40 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
-
-import Button from './Button';
-import { getNews } from '../services/getNews';
-import { deleteNews } from '../services/deleteNews';
-
+import { useNavigate } from 'react-router-dom';
+import { animationFunction } from '../services/animationFunction';
 import { AppProps } from '../types/types';
 
-const Header: React.FC<AppProps> = () => {
-  // const HeaderAnimation = keyframes`
-  //   100% {
-  //     transform: translateX(20px);
-  //   }
-  // `;
-
-  const Container = styled.div`
-    position: fixed;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    background-color: #fc6600;
-    top: 0;
-    padding: 35px;
-    font-size: 25px;
-    z-index: -100;
-  `;
-
-  const Title = styled.h1`
-    font-family: sans-serif;
-    color: #fff;
-  `;
-
-  const dispatch = useDispatch();
-  const updateNews = () => {
-    dispatch(deleteNews());
-    dispatch(getNews());
-  };
-
-  const fn = () => {
-    if (window.scrollY > 20) {
-      document.querySelector('h1')?.classList.add('toleft');
-      document.querySelector('h1')?.classList.remove('tocenter');
-
-      document.querySelector('button')?.classList.add('toright');
-      document.querySelector('button')?.classList.remove('tocenter');
-    } else {
-      document.querySelector('h1')?.classList.add('tocenter');
-      document.querySelector('h1')?.classList.remove('toleft');
-
-      document.querySelector('button')?.classList.add('tocenter');
-      document.querySelector('button')?.classList.remove('toright');
-    }
-  };
-
+const Header: React.FC<AppProps> = ({ page, updateNews, updateComments }) => {
   useEffect(() => {
-    window.addEventListener('scroll', fn);
+    window.addEventListener('scroll', animationFunction);
   }, []);
+
+  const navigate = useNavigate();
+  const goBackToHomePage = () => {
+    navigate(-1);
+  };
+
   return (
-    <Container>
-      <Title>Hacker News</Title>
-      <Button title="Update News" buttonFunction={updateNews} />
-    </Container>
+    <div className="header-container">
+      {page === 'home' ? (
+        <>
+          <h1 className="main-title">
+            <a href={window.location.href}>Hacker News</a>
+          </h1>
+          <button className="button update-news-button" onClick={updateNews}>
+            Update News
+          </button>
+        </>
+      ) : (
+        <>
+          <button className="button back-button" onClick={goBackToHomePage}>
+            Back
+          </button>
+          <button className="button update-comments-button" onClick={updateComments}>
+            Update comments
+          </button>
+        </>
+      )}
+    </div>
   );
 };
 
