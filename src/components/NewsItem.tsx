@@ -1,51 +1,28 @@
 import React from 'react';
-import styled from 'styled-components';
 import { timestampToDate } from '../services/timestampToDate';
-// import { NewsItemType } from '../types/types';
+import { NewsItemType } from '../types/types';
 
-import { faComment, faThumbsUp, faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
+import {
+  faComment,
+  faThumbsUp,
+  faCalendarAlt,
+  faShareSquare,
+} from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const NewsItem: any = (props: any) => {
-  const Item = styled.div`
-    display: flex;
-    align-items: center;
-    padding: 60px;
-    background-color: #cccc;
-    color: black;
-    font-family: sans-serif;
-    margin: 10px auto;
-    max-width: 50%;
-    padding: 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    & p {
-      margin-bottom: 10px;
-    }
-  `;
-
-  const Index = styled.p`
-    background: black;
-    color: white;
-    font-size: 20px;
-    padding: 9px 15px;
-    border-radius: 50%;
-    margin-right: 30px;
-  `;
-
-  const ItemTitle = styled.h2`
-    margin: 10px 0;
-  `;
-
+const NewsItem: React.FC<NewsItemType> = (props) => {
   return (
-    <Item>
-      {props.index ? <Index>{props.index}</Index> : null}
+    <div className="item">
+      {props.index ? <p className="index">{props.index}</p> : null}
       <div>
-        <ItemTitle>{props.title}</ItemTitle>
+        <h2 className="item-title">{props.title}</h2>
         {props.url ? (
-          <a href={props.url} target="_blank" rel="noreferrer">
-            {props.url.split('/')[2]}
-          </a>
+          <p>
+            <FontAwesomeIcon icon={faShareSquare} />{' '}
+            <a href={props.url} target="_blank" rel="noreferrer">
+              {props.url.split('/')[2]}
+            </a>
+          </p>
         ) : null}
         {props.points ? (
           <p>
@@ -66,7 +43,7 @@ const NewsItem: any = (props: any) => {
           </p>
         ) : null}
       </div>
-    </Item>
+    </div>
   );
 };
 

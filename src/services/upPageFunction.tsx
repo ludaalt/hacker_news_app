@@ -1,4 +1,4 @@
-export const upPageFunction = () => {
+export const upPageFunction = (): void => {
   window.scrollTo({
     top: 0,
     left: 0,
