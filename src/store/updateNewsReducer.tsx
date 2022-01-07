@@ -9,12 +9,12 @@ const defaultState: StateType = {
 export const updateNewsReducer = (state = defaultState, action: Action): StateType => {
   switch (action.type) {
     case ActionType.ADD_NEWS: {
-      const newState = { ...state, arrayNews: action.payload };
+      const newState = { ...state, arrayNews: [...state.arrayNews, ...action.payload] };
       if (newState.arrayNews && newState.arrayNews.length > 100) {
         const newArrayNews = newState.arrayNews
           .sort(function (a: NewsItemType, b: NewsItemType): number {
             if (a.time && b.time) return b.time - a.time;
-            return Number(null);
+            else return Number(null);
             // return b?.time - a?.time;
           })
           .slice(0, 100);
@@ -25,7 +25,7 @@ export const updateNewsReducer = (state = defaultState, action: Action): StateTy
     }
 
     case ActionType.DELETE_NEWS: {
-      return { arrayNews: [] };
+      return defaultState;
     }
 
     default:

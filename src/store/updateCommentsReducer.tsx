@@ -9,11 +9,11 @@ const defaultState: StateType = {
 export const updateCommentsReducer = (state = defaultState, action: Action): StateType => {
   switch (action.type) {
     case ActionType.UPDATE_COMMENTS: {
-      return { ...state, arrayComments: action.payload };
+      return { ...state, arrayComments: [action.payload] };
     }
 
     case ActionType.DELETE_COMMENTS: {
-      return { arrayComments: [] };
+      return defaultState;
     }
 
     default:
