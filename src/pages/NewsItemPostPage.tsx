@@ -1,45 +1,39 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
-import { useNavigate } from 'react-router-dom';
 
-import Button from '../components/Button';
 import NewsItem from '../components/NewsItem';
 import Comments from '../components/Comments';
+import Header from '../components/Header';
 
 import { useDispatch } from 'react-redux';
 import { getComments } from '../services/getComments';
-
-// import { deleteComments } from '../services/deleteComments';
+import { deleteComments } from '../services/deleteComments';
+import { upPageFunction } from '../services/upPageFunction';
 
 import { AppProps, NewsItemType } from '../types/types';
 
 const NewsItemPostPage: React.FC<AppProps> = ({ news, comments }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const newsItem = news && news.find((item: NewsItemType) => item.id === Number(id));
 
-  // const updateCommentsFunction = () => {
-  // dispatch(deleteComments());
-  // dispatch(getComments(Number(id)));
-  // };
+  const updateComments = () => {
+    dispatch(deleteComments());
+    dispatch(getComments(Number(id)));
+  };
 
   useEffect(() => {
-    dispatch(getComments(Number(id)));
-  }, [dispatch, id]);
-
-  // setInterval(updateCommentsFunction, 60000);
-
-  const goBackToHomePage = () => {
-    navigate(-1);
-  };
+    upPageFunction();
+    updateComments();
+    setInterval(updateComments, 60000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      <Button title="Back" buttonFunction={goBackToHomePage} />
-
-      <div className="newsItemPostContainer">
+      <Header updateComments={updateComments} />
+      <div className="news-item-post-container">
         {newsItem && (
           <NewsItem
             title={newsItem.title}
@@ -50,7 +44,7 @@ const NewsItemPostPage: React.FC<AppProps> = ({ news, comments }) => {
           />
         )}
 
-        <Comments comments={comments} />
+        <Comments comments={comments && comments[0]?.comments} />
       </div>
     </>
   );
