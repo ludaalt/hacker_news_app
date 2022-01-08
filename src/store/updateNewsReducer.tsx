@@ -1,6 +1,5 @@
 import { StateType, NewsItemType } from '../types/types';
-import { Action } from '../types/action';
-import { ActionType } from '../types/actionType';
+import { ActionType, Action } from '../types/action';
 
 const defaultState: StateType = {
   arrayNews: [],
@@ -9,7 +8,7 @@ const defaultState: StateType = {
 export const updateNewsReducer = (state = defaultState, action: Action): StateType => {
   switch (action.type) {
     case ActionType.ADD_NEWS: {
-      const newState = { ...state, arrayNews: [...state.arrayNews, ...action.payload] };
+      const newState = { ...state, arrayNews: action.payload };
       if (newState.arrayNews && newState.arrayNews.length > 100) {
         const newArrayNews = newState.arrayNews
           .sort(function (a: NewsItemType, b: NewsItemType): number {

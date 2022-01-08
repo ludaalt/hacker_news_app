@@ -1,6 +1,5 @@
 import { StateType, CommentsItemType } from '../types/types';
-import { ActionType } from '../types/actionType';
-import { Action } from '../types/action';
+import { ActionType, Action } from '../types/action';
 
 const defaultState: StateType = {
   arrayComments: [],
