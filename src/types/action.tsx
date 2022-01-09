@@ -1,27 +1,36 @@
 import { NewsItemType, CommentsItemType } from './types';
 
-interface addNewsAction {
-  // type: ActionType.ADD_NEWS;
-  type: string;
-  payload?: Array<NewsItemType>;
+export enum ActionType {
+  /* eslint-disable */
+  ADD_NEWS = 'ADD_NEWS',
+  DELETE_NEWS = 'DELETE_NEWS',
+  UPDATE_COMMENTS = 'UPDATE_COMMENTS',
+  DELETE_COMMENTS = 'DELETE_COMMENTS',
+  /* eslint-enable */
+}
+
+export interface addNewsActionType {
+  type: ActionType.ADD_NEWS;
+  payload?: Array<NewsItemType> | undefined;
 }
 
 interface deleteNewsAction {
-  // type: ActionType.DELETE_NEWS;
-  type: string;
+  type: ActionType.DELETE_NEWS;
   payload?: [];
 }
 
 interface updateCommentsAction {
-  // type: ActionType.UPDATE_COMMENTS;
-  type: string;
+  type: ActionType.UPDATE_COMMENTS;
   payload?: Array<CommentsItemType>;
 }
 
 interface deleteCommentsAction {
-  // type: ActionType.DELETE_COMMENTS;
-  type: string;
+  type: ActionType.DELETE_COMMENTS;
   payload?: [];
 }
 
-export type Action = addNewsAction | deleteNewsAction | updateCommentsAction | deleteCommentsAction;
+export type Action =
+  | addNewsActionType
+  | deleteNewsAction
+  | updateCommentsAction
+  | deleteCommentsAction;
