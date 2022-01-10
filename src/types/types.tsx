@@ -2,20 +2,18 @@ export interface AppProps {
   news?: Array<NewsItemType>;
   comments?: Array<CommentsItemType>;
   page?: string;
-  updateNews?: void;
-  updateComments?: void;
-  // buttonFunction?: ((event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
+  updateNews?: ((event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
+  updateComments?: ((event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
 }
 
 export interface StateType {
   arrayNews?: Array<NewsItemType> | undefined;
-  arrayComments?: Array<CommentsItemType> | undefined;
+  arrayComments?: Array<CommentsItemType> | Array<CommentsItemType[] | undefined>;
 }
 
 export interface ButtonType {
   title?: string;
   onClick?: void;
-  // buttonFunction?: ((event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
 }
 
 export interface NewsItemType {
