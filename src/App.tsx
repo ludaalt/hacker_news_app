@@ -3,7 +3,7 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NewsItemPostPage from './pages/NewsItemPostPage';
 import HomePage from './pages/HomePage';
-import { AppProps } from './types/types';
+import { AppProps } from './types/props';
 
 const App: React.FC<AppProps> = () => {
   const news = useSelector((state: RootStateOrAny) => state.news?.arrayNews);

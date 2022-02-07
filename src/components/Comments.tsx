@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { AppProps, CommentsItemType } from '../types/types';
+import { CommentsProps } from '../types/props';
 
-const Comments: React.FC<AppProps> = ({ comments }) => {
+const Comments: React.FC<CommentsProps> = ({ comments }) => {
   useEffect(() => {
     const nonDisplayCollection = document.querySelectorAll('.drop-container > ul');
     for (let i = 0; i < nonDisplayCollection.length; i += 1) {
@@ -20,7 +20,7 @@ const Comments: React.FC<AppProps> = ({ comments }) => {
   return (
     <>
       {comments &&
-        comments.map((item: CommentsItemType, key: number) => (
+        comments.map((item, key: number) => (
           <ul key={key}>
             {item.comments && item.comments.length !== 0 ? (
               <li className="drop-container">

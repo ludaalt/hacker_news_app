@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { animationFunction } from '../services/animationFunction';
-import { AppProps } from '../types/types';
+import { HeaderProps } from '../types/props';
 
-const Header: React.FC<AppProps> = ({ page, updateNews, updateComments }) => {
+const Header: React.FC<HeaderProps> = ({ page, updateNews, updateComments }) => {
   useEffect(() => {
     window.addEventListener('scroll', animationFunction);
   }, []);

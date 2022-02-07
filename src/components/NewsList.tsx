@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import NewsItem from './NewsItem';
-import { AppProps, NewsItemType } from '../types/types';
+import { AppProps } from '../types/props';
+import { NewsItemType } from '../types/types';
 
 const NewsList: React.FC<AppProps> = ({ news }) => {
   return (

@@ -11,7 +11,7 @@ export enum ActionType {
 
 export interface addNewsActionType {
   type: ActionType.ADD_NEWS;
-  payload?: Array<NewsItemType> | undefined;
+  payload?: Array<NewsItemType>;
 }
 
 interface deleteNewsAction {

@@ -10,36 +10,44 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const NewsItem: React.FC<NewsItemType> = (props) => {
+const NewsItem: React.FC<NewsItemType> = ({
+  index,
+  title,
+  url,
+  points,
+  user,
+  time,
+  commentsCount,
+}) => {
   return (
     <div className="item">
-      {props.index ? <p className="index">{props.index}</p> : null}
+      {index ? <p className="index">{index}</p> : null}
       <div>
-        <h2 className="item-title">{props.title}</h2>
-        {props.url ? (
+        <h2 className="item-title">{title}</h2>
+        {url ? (
           <p>
             <FontAwesomeIcon icon={faShareSquare} />{' '}
-            <a href={props.url} target="_blank" rel="noreferrer">
-              {props.url.split('/')[2]}
+            <a href={url} target="_blank" rel="noreferrer">
+              {url.split('/')[2]}
             </a>
           </p>
         ) : null}
-        {props.points ? (
+        {points ? (
           <p>
-            <FontAwesomeIcon icon={faThumbsUp} /> {props.points}
+            <FontAwesomeIcon icon={faThumbsUp} /> {points}
           </p>
         ) : null}
         <p>
-          by <span className="orange-text">{props.user}</span>
+          by <span className="orange-text">{user}</span>
         </p>
-        {props.time ? (
+        {time ? (
           <p>
-            <FontAwesomeIcon icon={faCalendarAlt} /> {timestampToDate(props.time)}
+            <FontAwesomeIcon icon={faCalendarAlt} /> {timestampToDate(time)}
           </p>
         ) : null}
-        {props.commentsCount ? (
+        {commentsCount ? (
           <p>
-            <FontAwesomeIcon icon={faComment} /> {props.commentsCount}
+            <FontAwesomeIcon icon={faComment} /> {commentsCount}
           </p>
         ) : null}
       </div>
