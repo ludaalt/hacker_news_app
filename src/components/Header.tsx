@@ -1,37 +1,34 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { animationFunction } from '../services/animationFunction';
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useWindowScroll } from 'react-use';
 import { HeaderProps } from '../types/props';
 
-const Header: React.FC<HeaderProps> = ({ page, updateNews, updateComments }) => {
-  useEffect(() => {
-    window.addEventListener('scroll', animationFunction);
-  }, []);
+import Button from './Button';
 
+const Header: React.FC<HeaderProps> = ({ updateNews, updateComments }) => {
+  const { y } = useWindowScroll();
+  const location = useLocation();
   const navigate = useNavigate();
+
   const goBackToHomePage = () => {
-    navigate(-1);
+    navigate('/');
   };
 
   return (
     <div className="header-container">
-      {page === 'home' ? (
+      {location.pathname === '/' ? (
         <>
-          <h1 className="main-title">
-            <a href={window.location.href}>Hacker News</a>
-          </h1>
-          <button className="button update-news-button" onClick={updateNews}>
-            Update News
-          </button>
+          <h1 style={{ marginRight: y < 800 ? `${y}px` : '800px' }}>Hacker News</h1>
+          <Button title="Update News" className="update-news-button" hadleFunction={updateNews} />
         </>
       ) : (
         <>
-          <button className="button back-button" onClick={goBackToHomePage}>
-            Back
-          </button>
-          <button className="button update-comments-button" onClick={updateComments}>
-            Update comments
-          </button>
+          <Button title="Back" className="back-button" hadleFunction={goBackToHomePage} />
+          <Button
+            title="Update comments"
+            className="update-comments-button"
+            hadleFunction={updateComments}
+          />
         </>
       )}
     </div>
