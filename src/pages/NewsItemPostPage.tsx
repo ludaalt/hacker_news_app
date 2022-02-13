@@ -1,52 +1,55 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, SetStateAction } from 'react';
 import { useParams } from 'react-router';
+import { useSelector, RootStateOrAny } from 'react-redux';
+import styled from 'styled-components';
 
 import NewsItem from '../components/NewsItem';
 import Comments from '../components/Comments';
-import Header from '../components/Header';
 
-import { useDispatch } from 'react-redux';
-import { getComments } from '../services/getComments';
-import { deleteComments } from '../services/deleteComments';
-import { upPageFunction } from '../services/upPageFunction';
+import { NewsItemType, NewsItemPostPageProps } from '../types/types';
 
-import { AppProps, NewsItemType } from '../types/types';
+const NewsItemPostContainer = styled.div`
+  margin: 0 auto;
+  margin-top: 150px;
+  padding: 10px;
+  text-align: justify;
+  max-width: 60%;
+  border-radius: 20px;
+  background-color: #cccc;
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+`;
 
-const NewsItemPostPage: React.FC<AppProps> = ({ news, comments }) => {
+const NewsItemPostPage: React.FC<NewsItemPostPageProps> = ({ passCurrentNewsItemId }) => {
+  const news = useSelector((state: RootStateOrAny) => state.news?.arrayNews);
+  const comments = useSelector((state: RootStateOrAny) => state.comments.arrayComments);
+
   const { id } = useParams();
-  const dispatch = useDispatch();
 
-  const newsItem = news && news.find((item: NewsItemType) => item.id === Number(id));
-
-  const updateComments = () => {
-    dispatch(deleteComments());
-    dispatch(getComments(Number(id)));
+  const functionHandler = (id: SetStateAction<string>) => {
+    passCurrentNewsItemId(id);
   };
 
   useEffect(() => {
-    upPageFunction();
-    updateComments();
-    setInterval(updateComments, 60000);
+    id && functionHandler(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <>
-      <Header updateComments={updateComments} />
-      <div className="news-item-post-container">
-        {newsItem && (
-          <NewsItem
-            title={newsItem.title}
-            url={newsItem.url}
-            time={newsItem.time}
-            user={newsItem.user}
-            commentsCount={newsItem.commentsCount}
-          />
-        )}
+  const newsItem = news && news.find((item: NewsItemType) => item.id === Number(id));
 
-        <Comments comments={comments && comments[0]?.comments} />
-      </div>
-    </>
+  return (
+    <NewsItemPostContainer>
+      {newsItem && (
+        <NewsItem
+          title={newsItem.title}
+          url={newsItem.url}
+          time={newsItem.time}
+          user={newsItem.user}
+          commentsCount={newsItem.commentsCount}
+          points={newsItem.points}
+        />
+      )}
+      <Comments comments={comments} />
+    </NewsItemPostContainer>
   );
 };
 
