@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import NewsItem from '../components/NewsItem';
 import Comments from '../components/Comments';
 
-import { NewsItemType, NewsItemPostPageProps } from '../types/types';
+import { NewsItemType } from '../types/types';
+import { NewsItemPostPageProps } from '../types/props';
 
 const NewsItemPostContainer = styled.div`
   margin: 0 auto;
