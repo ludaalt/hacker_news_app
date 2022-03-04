@@ -20,11 +20,17 @@ const ButtonElem = styled.button`
   &:active {
     background: rgb(152, 15, 0);
   }
+
+  .to-up-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+  }
 `;
 
 const Button: React.FC<ButtonProps> = ({ title, className, hadleFunction }) => {
   return (
-    <ButtonElem className={className} onClick={() => hadleFunction}>
+    <ButtonElem className={className} onClick={hadleFunction}>
       {title}
     </ButtonElem>
   );
