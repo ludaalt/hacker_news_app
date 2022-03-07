@@ -15,7 +15,7 @@ const requests = urls.map((url) => fetch(url));
 export const getNews = (): unknown => {
   return (dispatch: Dispatch<Action>) => {
     Promise.all(requests)
-      .then((responses) => Promise.all(responses.map((response) => response.json())))
+      .then((responses) => Promise.all(responses.map((response) => response.clone().json())))
       .then((jsons) => jsons.forEach((json) => dispatch(addNewsAction(json))));
   };
 };
