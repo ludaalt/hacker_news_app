@@ -1,11 +1,6 @@
 export interface StateType {
   arrayNews?: Array<NewsItemType>;
-  arrayComments?: Array<CommentsItemType> | undefined;
-}
-
-export interface ButtonType {
-  title?: string;
-  onClick?: void;
+  arrayComments?: Array<CommentsItemType> | object;
 }
 
 export interface NewsItemType {
@@ -27,5 +22,5 @@ export interface CommentsItemType {
   user: string;
   time: number;
   content: string;
-  comments: Array<CommentsItemType>;
+  comments: Array<CommentsItemType> | undefined;
 }
