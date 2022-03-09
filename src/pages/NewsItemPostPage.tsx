@@ -1,4 +1,4 @@
-import React, { useEffect, SetStateAction } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import styled from 'styled-components';
@@ -7,7 +7,7 @@ import NewsItem from '../components/NewsItem';
 import Comments from '../components/Comments';
 
 import { NewsItemType } from '../types/types';
-import { NewsItemPostPageProps } from '../types/props';
+import { PostPageProps } from '../types/props';
 
 const NewsItemPostContainer = styled.div`
   margin: 0 auto;
@@ -20,18 +20,20 @@ const NewsItemPostContainer = styled.div`
   box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
 `;
 
-const NewsItemPostPage: React.FC<NewsItemPostPageProps> = ({ passCurrentNewsItemId }) => {
+const NewsItemPostPage: React.FC<PostPageProps> = ({ updateComments }) => {
   const news = useSelector((state: RootStateOrAny) => state.news?.arrayNews);
   const comments = useSelector((state: RootStateOrAny) => state.comments.arrayComments);
 
   const { id } = useParams();
 
-  const functionHandler = (id: SetStateAction<string>) => {
-    passCurrentNewsItemId(id);
-  };
-
   useEffect(() => {
-    id && functionHandler(id);
+    updateComments(Number(id));
+    const updateTimer = setInterval(() => updateComments, 60000);
+
+    return () => {
+      clearInterval(updateTimer);
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

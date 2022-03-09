@@ -1,34 +1,30 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, RootStateOrAny } from 'react-redux';
 
-import Header from '../components/Header';
 import NewsList from '../components/NewsList';
-import { getNews } from '../services/getNews';
-import { deleteNews } from '../services/deleteNews';
+import Button from '../components/Button';
 import { upPageFunction } from '../services/upPageFunction';
-import { AppProps } from '../types/types';
+import { MainPageProps } from '../types/props';
 
-const HomePage: React.FC<AppProps> = ({ news, comments }) => {
-  const updateNews = () => {
-    dispatch(deleteNews());
-    dispatch(getNews());
-  };
+const HomePage: React.FC<MainPageProps> = ({ updateNews }) => {
+  const news = useSelector((state: RootStateOrAny) => state.news?.arrayNews);
+  const comments = useSelector((state: RootStateOrAny) => state.comments?.arrayComments);
 
-  const dispatch = useDispatch();
   useEffect(() => {
     updateNews();
-    setInterval(updateNews, 60000);
+    const updateTimer = setInterval(() => updateNews, 60000);
+
+    return () => {
+      clearInterval(updateTimer);
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <Header page="home" updateNews={updateNews} />
       <NewsList news={news} comments={comments} />
-
-      <button className="button to-up-button" onClick={upPageFunction}>
-        Up
-      </button>
+      <Button title="Up" className="up" handleFunction={upPageFunction} />
     </>
   );
 };
