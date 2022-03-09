@@ -1,6 +1,8 @@
 import { StateType, NewsItemType } from '../types/types';
 import { ActionType, Action } from '../types/action';
 
+const REQUIRED_NUMBER_OF_NEWS = 100;
+
 const defaultState: StateType = {
   arrayNews: [],
 };
@@ -13,8 +15,9 @@ export const updateNewsReducer = (state = defaultState, action: Action): StateTy
         newState?.arrayNews?.push(...action.payload);
       }
 
-      if (newState.arrayNews && newState.arrayNews.length > 100) {
+      if (newState.arrayNews && newState.arrayNews.length > REQUIRED_NUMBER_OF_NEWS) {
         const newArrayNews = newState.arrayNews
+          .filter((item, index) => newState.arrayNews?.indexOf(item) === index)
           .sort(function (a: NewsItemType, b: NewsItemType): number {
             if (a.time && b.time) return b.time - a.time;
             else return Number(null);
@@ -24,11 +27,11 @@ export const updateNewsReducer = (state = defaultState, action: Action): StateTy
         return { ...newState, arrayNews: newArrayNews };
       }
 
-      return newState;
+      return { ...newState, arrayNews: newState.arrayNews };
     }
 
     case ActionType.DELETE_NEWS: {
-      return defaultState;
+      return { arrayNews: [] };
     }
 
     default:

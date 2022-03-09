@@ -8,7 +8,13 @@ const defaultState: StateType = {
 export const updateCommentsReducer = (state = defaultState, action: Action): StateType => {
   switch (action.type) {
     case ActionType.UPDATE_COMMENTS: {
-      return { ...state, arrayComments: [action.payload] };
+      const newState = { ...state };
+      if (action.payload) {
+        newState.arrayComments = action.payload;
+        // return { ...state, arrayComments: [action.payload] };
+      }
+
+      return newState;
     }
 
     case ActionType.DELETE_COMMENTS: {
