@@ -6,6 +6,7 @@ import { HeaderProps } from '../types/props';
 import styled from 'styled-components';
 
 import Button from './Button';
+import UpdateComentsButton from './UpdateCommentsButton';
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -39,12 +40,13 @@ const Header: React.FC<HeaderProps> = ({ updateNews, updateComments }) => {
       {location.pathname === '/' ? (
         <>
           <MainTitle style={{ marginRight: y < 800 ? `${y}px` : '800px' }}>Hacker News</MainTitle>
-          <Button title="Update News" className="update-news-button" hadleFunction={updateNews} />
+          <Button title="Update News" className="update-news-button" handleFunction={updateNews} />
         </>
       ) : (
         <>
-          <Button title="Back" className="back-button" hadleFunction={goBackToHomePage} />
-          <Button title="Update comments" hadleFunction={updateComments} />
+          <Button title="Back" className="back-button" handleFunction={goBackToHomePage} />
+          <UpdateComentsButton title="Update comments" updateComments={updateComments} />
+          {/* <Button title="Update comments" handleFunction={updateComments} /> */}
         </>
       )}
     </HeaderContainer>
