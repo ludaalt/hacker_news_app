@@ -3,7 +3,11 @@ import styled from 'styled-components';
 
 import { ButtonProps } from '../types/props';
 
-const ButtonElem = styled.button`
+const Button: React.FC<ButtonProps> = ({ title, ...props }) => {
+  return <ButtonElement {...props}>{title}</ButtonElement>;
+};
+
+const ButtonElement = styled.button`
   font-size: 20px;
   margin: 0;
   color: #fff;
@@ -25,15 +29,8 @@ const ButtonElem = styled.button`
     position: fixed;
     right: 20px;
     bottom: 20px;
+    z-index: 10000;
   }
 `;
-
-const Button: React.FC<ButtonProps> = ({ title, className, handleFunction }) => {
-  return (
-    <ButtonElem className={className} onClick={handleFunction}>
-      {title}
-    </ButtonElem>
-  );
-};
 
 export default Button;
