@@ -1,34 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router';
-import { useSelector, RootStateOrAny } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-
 import NewsItem from '../components/NewsItem';
 import Comments from '../components/Comments';
+import { StateType, NewsItemType } from '../types/types';
 
-import { NewsItemType } from '../types/types';
-import { PostPageProps } from '../types/props';
+export interface PostPageProps {
+  updateData: (mode: string, id?: number | undefined) => void;
+}
 
-const NewsItemPostContainer = styled.div`
-  margin: 0 auto;
-  margin-top: 150px;
-  padding: 10px;
-  text-align: justify;
-  max-width: 60%;
-  border-radius: 20px;
-  background-color: #cccc;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
-`;
-
-const NewsItemPostPage: React.FC<PostPageProps> = ({ updateComments }) => {
-  const news = useSelector((state: RootStateOrAny) => state.news?.arrayNews);
-  const comments = useSelector((state: RootStateOrAny) => state.comments.arrayComments);
+const NewsItemPostPage: React.FC<PostPageProps> = ({ updateData }) => {
+  const news = useSelector((state: StateType) => state.data?.news);
+  const comments = useSelector((state: StateType) => state.data?.comments);
 
   const { id } = useParams();
 
   useEffect(() => {
-    updateComments(Number(id));
-    const updateTimer = setInterval(() => updateComments, 60000);
+    updateData('news');
+    updateData('comments', Number(id));
+    const updateTimer = setInterval(() => updateData, 60000);
 
     return () => {
       clearInterval(updateTimer);
@@ -37,7 +28,10 @@ const NewsItemPostPage: React.FC<PostPageProps> = ({ updateComments }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const newsItem = news && news.find((item: NewsItemType) => item.id === Number(id));
+  const newsItem = useMemo(
+    () => news && news.find((item: NewsItemType) => item.id === Number(id)),
+    [news, id]
+  );
 
   return (
     <NewsItemPostContainer>
@@ -55,5 +49,16 @@ const NewsItemPostPage: React.FC<PostPageProps> = ({ updateComments }) => {
     </NewsItemPostContainer>
   );
 };
+
+const NewsItemPostContainer = styled.div`
+  margin: 0 auto;
+  margin-top: 150px;
+  padding: 10px;
+  text-align: justify;
+  max-width: 60%;
+  border-radius: 20px;
+  background-color: #cccc;
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+`;
 
 export default NewsItemPostPage;
