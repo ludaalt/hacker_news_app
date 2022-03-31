@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Loader = () => <LoaderBody />;
+const Loader = (): JSX.Element => <LoaderBody />;
 
 const LoaderBody = styled.div`
   display: inline-block;
