@@ -1,7 +1,5 @@
 import { Dispatch } from 'redux';
-
-import { deleteCommentsAction } from '../store/updateCommentsReducer';
-// import { Action } from '../types/action';
+import { deleteCommentsAction } from '../store/updateDataReducer';
 
 export const deleteComments = (): unknown => {
   return (dispatch: Dispatch) => {

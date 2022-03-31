@@ -1,6 +1,5 @@
-import { updateCommentsAction } from '../store/updateCommentsReducer';
+import { updateCommentsAction } from '../store/updateDataReducer';
 import { Dispatch } from 'redux';
-
 import { Action } from '../types/action';
 
 export const getComments = (id: number): unknown => {
