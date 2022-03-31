@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
-import { useSelector, RootStateOrAny } from 'react-redux';
-
+import { useSelector } from 'react-redux';
+import { StateType } from '../types/types';
 import NewsList from '../components/NewsList';
 import Button from '../components/Button';
 import { upPageFunction } from '../services/upPageFunction';
-import { MainPageProps } from '../types/props';
 
-const HomePage: React.FC<MainPageProps> = ({ updateNews }) => {
-  const news = useSelector((state: RootStateOrAny) => state.news?.arrayNews);
-  const comments = useSelector((state: RootStateOrAny) => state.comments?.arrayComments);
+export interface HomePageProps {
+  mode: string;
+  updateData: (mode: string, id?: number | undefined) => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ updateData, mode }) => {
+  const news = useSelector((state: StateType) => state.data?.news);
+  const comments = useSelector((state: StateType) => state.data?.comments);
 
   useEffect(() => {
-    updateNews();
-    const updateTimer = setInterval(() => updateNews, 60000);
+    updateData(mode);
+    const updateTimer = setInterval(() => updateData, 60000);
 
     return () => {
       clearInterval(updateTimer);
@@ -24,7 +28,7 @@ const HomePage: React.FC<MainPageProps> = ({ updateNews }) => {
   return (
     <>
       <NewsList news={news} comments={comments} />
-      <Button title="Up" className="up" handleFunction={upPageFunction} />
+      <Button title="Up" className="up" onClick={upPageFunction} />
     </>
   );
 };
