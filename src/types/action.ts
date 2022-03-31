@@ -6,6 +6,7 @@ export enum ActionType {
   DELETE_NEWS = 'DELETE_NEWS',
   UPDATE_COMMENTS = 'UPDATE_COMMENTS',
   DELETE_COMMENTS = 'DELETE_COMMENTS',
+  CHANGE_LOADING_STATUS = 'CHANGE_LOADING_STATUS',
   /* eslint-enable */
 }
 
@@ -29,8 +30,14 @@ interface deleteCommentsAction {
   payload?: [];
 }
 
+interface changeLoadingStatus {
+  type: ActionType.CHANGE_LOADING_STATUS;
+  payload: boolean;
+}
+
 export type Action =
   | addNewsActionType
   | deleteNewsAction
   | updateCommentsAction
-  | deleteCommentsAction;
+  | deleteCommentsAction
+  | changeLoadingStatus;

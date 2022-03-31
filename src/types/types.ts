@@ -1,6 +1,17 @@
 export interface StateType {
-  arrayNews?: Array<NewsItemType>;
-  arrayComments?: Array<CommentsItemType> | object;
+  news: Array<NewsItemType>;
+  comments: Array<CommentsItemType>;
+  data?: {
+    news: Array<NewsItemType>;
+    comments: Array<CommentsItemType>;
+  };
+}
+
+export interface LoadingState {
+  loading: boolean;
+  loadingStatus?: {
+    loading: boolean;
+  };
 }
 
 export interface NewsItemType {
@@ -22,5 +33,5 @@ export interface CommentsItemType {
   user: string;
   time: number;
   content: string;
-  comments: Array<CommentsItemType> | undefined;
+  comments: Array<CommentsItemType>;
 }
