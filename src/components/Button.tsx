@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ButtonProps } from '../types/props';
+export interface ButtonProps extends React.BaseHTMLAttributes<HTMLButtonElement> {
+  title: string;
+}
 
 const Button: React.FC<ButtonProps> = ({ title, ...props }) => {
   return <ButtonElement {...props}>{title}</ButtonElement>;
