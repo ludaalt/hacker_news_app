@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import styled from 'styled-components';
-import { ShowCommentsButtonProps } from '../types/props';
+
+export interface ShowCommentsButtonProps {
+  value: string;
+  showComments: MouseEventHandler<HTMLDivElement>;
+}
+
+const ShowCommentsButton: React.FC<ShowCommentsButtonProps> = ({ value, showComments }) => {
+  return <ShowComments onClick={showComments}>{value}</ShowComments>;
+};
 
 const ShowComments = styled.div`
+  cursor: pointer;
   position: absolute;
-  z-index: 10;
-  left: -27px;
+  left: -5px;
   top: 15px;
   width: 20px;
   height: 20px;
-  /* background: darkgray; */
   background: black;
   text-align: center;
   font-weight: bold;
@@ -18,9 +25,5 @@ const ShowComments = styled.div`
   border-radius: 50%;
   color: white;
 `;
-
-const ShowCommentsButton: React.FC<ShowCommentsButtonProps> = ({ value, showComments }) => {
-  return <ShowComments onClick={showComments}>{value}</ShowComments>;
-};
 
 export default ShowCommentsButton;
