@@ -1,34 +1,37 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import ShowCommentsButton from './ShowCommentsButton';
 import Comments from './Comments';
-import { ShowCommentsContainerProps } from '../types/props';
-import styled from 'styled-components';
+import { CommentsItemType } from '../types/types';
+import makeComment from '../services/makeComment';
 
-const Container = styled.div`
-  position: relative;
-  padding: 20px;
-  // display: none;
-  /* border: 3px solid red; */
-  min-height: 100px;
-`;
+export interface ShowCommentsContainerProps {
+  item: CommentsItemType;
+}
 
 const ShowCommentsContainer: React.FC<ShowCommentsContainerProps> = ({ item }) => {
-  const [CommentsBlockShow, setCommentsBlockShow] = useState({ isShow: false, toShow: '+' });
+  const [commentsBlockShow, setCommentsBlockShow] = useState({ isShow: false, toShow: '+' });
 
   const showComments = (): void => {
-    const newState = Object.assign({}, CommentsBlockShow);
-    newState.isShow = !newState.isShow;
-    newState.toShow = newState.toShow === '+' ? '-' : '+';
+    const newState = {
+      isShow: !commentsBlockShow.isShow,
+      toShow: commentsBlockShow.toShow === '+' ? '-' : '+',
+    };
     setCommentsBlockShow(newState);
   };
 
   return (
     <Container>
-      <div>{item.type === 'comment' && item.content}</div>
-      <ShowCommentsButton showComments={showComments} value={CommentsBlockShow.toShow} />
-      {<Comments comments={item.comments} />}
+      {makeComment(item)}
+      <ShowCommentsButton showComments={showComments} value={commentsBlockShow.toShow} />
+      {commentsBlockShow.isShow && <Comments comments={item.comments} />}
     </Container>
   );
 };
+
+const Container = styled.div`
+  position: relative;
+  padding: 20px;
+`;
 
 export default ShowCommentsContainer;
