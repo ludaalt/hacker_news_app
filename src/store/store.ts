@@ -1,13 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-
-import { updateNewsReducer } from './updateNewsReducer';
-import { updateCommentsReducer } from './updateCommentsReducer';
+import { updateDataReducer } from './updateDataReducer';
+import { updateLoadingReducer } from './updateLoadingReducer';
 
 const rootReducer = combineReducers({
-  news: updateNewsReducer,
-  comments: updateCommentsReducer,
+  data: updateDataReducer,
+  loadingStatus: updateLoadingReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
