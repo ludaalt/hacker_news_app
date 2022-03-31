@@ -1,29 +1,36 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import NewsItemPostPage from './pages/NewsItemPostPage';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
-
+import Loader from './components/Loader';
 import { getNews } from './services/getNews';
 import { deleteNews } from './services/deleteNews';
-
 import { getComments } from './services/getComments';
 import { deleteComments } from './services/deleteComments';
+import { LoadingState, NewsItemType, CommentsItemType } from './types/types';
 
-import { AppProps } from './types/props';
+export interface AppProps {
+  news?: Array<NewsItemType>;
+  comments?: Array<CommentsItemType> | object;
+}
 
 const App: React.FC<AppProps> = () => {
+  const loading = useSelector((state: LoadingState) => state.loadingStatus);
+  console.log(loading?.loading);
   const dispatch = useDispatch();
 
-  const updateNews = () => {
-    dispatch(deleteNews());
-    dispatch(getNews());
-  };
+  const updateData = (mode: string, id?: number | undefined) => {
+    if (mode == 'news') {
+      dispatch(deleteNews());
+      dispatch(getNews());
+    }
 
-  const updateComments = (id: number) => {
-    dispatch(deleteComments());
-    dispatch(getComments(id));
+    if (mode == 'comments' && id) {
+      dispatch(deleteComments());
+      dispatch(getComments(id));
+    }
   };
 
   return (
@@ -34,8 +41,9 @@ const App: React.FC<AppProps> = () => {
             path="/"
             element={
               <>
-                <Header page="home" updateNews={updateNews} />
-                <HomePage updateNews={updateNews} />
+                <Header mode="news" updateData={updateData} />
+                {loading?.loading && <Loader />}
+                {<HomePage mode="news" updateData={updateData} />}
               </>
             }
           />
@@ -43,8 +51,9 @@ const App: React.FC<AppProps> = () => {
             path="/items/:id"
             element={
               <>
-                <Header page="post" updateComments={updateComments} />
-                <NewsItemPostPage updateComments={updateComments} />
+                <Header mode="comments" updateData={updateData} />
+                {loading?.loading && <Loader />}
+                <NewsItemPostPage updateData={updateData} />
               </>
             }
           />
