@@ -1,12 +1,42 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useWindowScroll } from 'react-use';
-import { HeaderProps } from '../types/props';
-
 import styled from 'styled-components';
-
 import Button from './Button';
-import UpdateComentsButton from './UpdateCommentsButton';
+
+export interface HeaderProps {
+  updateData: (mode: string, id?: number | undefined) => void;
+  mode: 'news' | 'comments';
+}
+
+const Header: React.FC<HeaderProps> = ({ updateData, mode }) => {
+  const { y } = useWindowScroll();
+  const navigate = useNavigate();
+
+  const goBackToHomePage = () => {
+    navigate('/');
+  };
+
+  return (
+    <HeaderContainer>
+      {mode === 'news' ? (
+        <>
+          <MainTitle style={{ marginRight: y < 800 ? `${y}px` : '800px' }}>Hacker News</MainTitle>
+          <Button
+            title="Update News"
+            className="update-news-button"
+            onClick={() => updateData(mode)}
+          />
+        </>
+      ) : (
+        <>
+          <Button title="Back" className="back-button" onClick={goBackToHomePage} />
+          <Button title="Update comments" onClick={() => updateData(mode)} />
+        </>
+      )}
+    </HeaderContainer>
+  );
+};
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -24,33 +54,8 @@ const HeaderContainer = styled.div`
 const MainTitle = styled.div`
   font-family: sans-serif;
   color: #fff;
+  font-size: 40px;
+  font-weight: bold;
 `;
-
-const Header: React.FC<HeaderProps> = ({ updateNews, updateComments }) => {
-  const { y } = useWindowScroll();
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const goBackToHomePage = () => {
-    navigate('/');
-  };
-
-  return (
-    <HeaderContainer>
-      {location.pathname === '/' ? (
-        <>
-          <MainTitle style={{ marginRight: y < 800 ? `${y}px` : '800px' }}>Hacker News</MainTitle>
-          <Button title="Update News" className="update-news-button" handleFunction={updateNews} />
-        </>
-      ) : (
-        <>
-          <Button title="Back" className="back-button" handleFunction={goBackToHomePage} />
-          <UpdateComentsButton title="Update comments" updateComments={updateComments} />
-          {/* <Button title="Update comments" handleFunction={updateComments} /> */}
-        </>
-      )}
-    </HeaderContainer>
-  );
-};
 
 export default Header;
