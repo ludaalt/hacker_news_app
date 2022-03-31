@@ -1,8 +1,5 @@
 import React from 'react';
-import { timestampToDate } from '../services/timestampToDate';
-import { NewsItemType } from '../types/types';
 import styled from 'styled-components';
-
 import {
   faComment,
   faThumbsUp,
@@ -10,48 +7,9 @@ import {
   faShareSquare,
 } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { timestampToDate } from '../services/timestampToDate';
 import { getDomain } from '../services/getDomain';
-
-const Item = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 60px;
-  background-color: #cccc;
-  color: black;
-  font-family: sans-serif;
-  margin: 10px auto;
-  padding: 10px;
-  border-radius: 20px;
-  text-decoration: none;
-  padding: 10px 20px;
-
-  p {
-    margin-bottom: 10px;
-  }
-`;
-
-const ItemTitle = styled.h2`
-  margin: 10px 0;
-`;
-
-const Index = styled.p`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: black;
-  color: white;
-  font-size: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 30px;
-  padding: 20px;
-`;
-
-const Author = styled.span`
-  color: #fc6600;
-`;
+import { NewsItemType } from '../types/types';
 
 const NewsItem: React.FC<NewsItemType> = ({
   index,
@@ -97,5 +55,45 @@ const NewsItem: React.FC<NewsItemType> = ({
     </Item>
   );
 };
+
+const Item = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 60px;
+  background-color: #cccc;
+  color: black;
+  font-family: sans-serif;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 20px;
+  text-decoration: none;
+  padding: 10px 20px;
+
+  p {
+    margin-bottom: 10px;
+  }
+`;
+
+const ItemTitle = styled.h2`
+  margin: 10px 0;
+`;
+
+const Index = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  color: white;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 30px;
+  padding: 20px;
+`;
+
+const Author = styled.span`
+  color: #fc6600;
+`;
 
 export default NewsItem;
