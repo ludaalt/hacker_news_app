@@ -3,11 +3,9 @@ ENV NODE_ENV production
 WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
-COPY tsconfig.json .
 RUN npm  ci
-RUN npm install --save eslint-config-react-app eslint
-RUN npm install --save @fortawesome/fontawesome-svg-core
 COPY . .
+
 RUN npm run build
 
 FROM nginx:1.21.0-alpine as production
