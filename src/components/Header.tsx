@@ -1,12 +1,12 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useWindowScroll } from 'react-use';
-import styled from 'styled-components';
-import Button from './Button';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useWindowScroll } from "react-use";
+import styled from "styled-components";
+import Button from "./Button";
 
 export interface HeaderProps {
   updateData: (mode: string, id?: number | undefined) => void;
-  mode: 'news' | 'comments';
+  mode: "news" | "comments";
 }
 
 const Header: React.FC<HeaderProps> = ({ updateData, mode }) => {
@@ -14,14 +14,16 @@ const Header: React.FC<HeaderProps> = ({ updateData, mode }) => {
   const navigate = useNavigate();
 
   const goBackToHomePage = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
     <HeaderContainer>
-      {mode === 'news' ? (
+      {mode === "news" ? (
         <>
-          <MainTitle style={{ marginRight: y < 800 ? `${y}px` : '800px' }}>Hacker News</MainTitle>
+          <MainTitle style={{ marginRight: y < 800 ? `${y}px` : "800px" }}>
+            Hacker News
+          </MainTitle>
           <Button
             title="Update News"
             className="update-news-button"
@@ -30,7 +32,11 @@ const Header: React.FC<HeaderProps> = ({ updateData, mode }) => {
         </>
       ) : (
         <>
-          <Button title="Back" className="back-button" onClick={goBackToHomePage} />
+          <Button
+            title="Back"
+            className="back-button"
+            onClick={goBackToHomePage}
+          />
           <Button title="Update comments" onClick={() => updateData(mode)} />
         </>
       )}
@@ -49,6 +55,10 @@ const HeaderContainer = styled.div`
   padding: 35px;
   font-size: 25px;
   z-index: -100;
+
+  @media (max-width: 620px) {
+    padding: 35px 5px;
+  }
 `;
 
 const MainTitle = styled.div`

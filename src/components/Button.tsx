@@ -1,7 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-export interface ButtonProps extends React.BaseHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.BaseHTMLAttributes<HTMLButtonElement> {
   title: string;
 }
 
@@ -32,6 +33,10 @@ const ButtonElement = styled.button`
     right: 20px;
     bottom: 20px;
     z-index: 10000;
+
+    @media (max-width: 620px) {
+      opacity: 0.9;
+    }
   }
 `;
 

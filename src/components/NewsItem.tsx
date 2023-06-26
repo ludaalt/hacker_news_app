@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import {
   faComment,
   faThumbsUp,
   faCalendarAlt,
   faShareSquare,
-} from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { timestampToDate } from '../services/timestampToDate';
-import { getDomain } from '../services/getDomain';
-import { NewsItemType } from '../types/types';
+} from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { timestampToDate } from "../services/timestampToDate";
+import { getDomain } from "../services/getDomain";
+import { NewsItemType } from "../types/types";
 
 const NewsItem: React.FC<NewsItemType> = ({
   index,
@@ -27,7 +27,7 @@ const NewsItem: React.FC<NewsItemType> = ({
         <ItemTitle>{title}</ItemTitle>
         {url ? (
           <p>
-            <FontAwesomeIcon icon={faShareSquare} />{' '}
+            <FontAwesomeIcon icon={faShareSquare} />{" "}
             <a href={url} target="_blank" rel="noreferrer">
               {getDomain(url)}
             </a>
@@ -68,6 +68,11 @@ const Item = styled.div`
   border-radius: 20px;
   text-decoration: none;
   padding: 10px 20px;
+  font-size: calc(0.5em + 1vw);
+
+  @media (max-width: 620px) {
+    padding: 5px 10px;
+  }
 
   p {
     margin-bottom: 10px;
@@ -90,6 +95,10 @@ const Index = styled.p`
   border-radius: 50%;
   margin-right: 30px;
   padding: 20px;
+
+  @media (max-width: 620px) {
+    margin-right: 10px;
+  }
 `;
 
 const Author = styled.span`
