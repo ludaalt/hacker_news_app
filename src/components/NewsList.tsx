@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import NewsItem from './NewsItem';
-import { NewsItemType, CommentsItemType } from '../types/types';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import NewsItem from "./NewsItem";
+import { NewsItemType, CommentsItemType } from "../types/types";
 
 export interface NewsListProps {
   news: Array<NewsItemType> | undefined;
@@ -38,6 +38,10 @@ const NewsContainer = styled.div`
   margin: auto;
   margin-top: 170px;
   max-width: 50%;
+
+  @media (max-width: 620px) {
+    max-width: 80%;
+  }
 `;
 
 export default NewsList;
